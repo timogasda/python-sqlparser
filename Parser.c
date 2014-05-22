@@ -37,7 +37,7 @@ int Parser_init(Parser* self, PyObject* args, PyObject *kwds)
 {
 	int vendor;
 	static char *kwlist[] = { "vendor", NULL };
-	vendor = dbvgeneric;
+	vendor = dbvmssql;
 
 	if (!PyArg_ParseTupleAndKeywords(args, kwds, "|i", kwlist, &vendor)) {
 		return -1;
