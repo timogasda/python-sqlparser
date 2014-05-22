@@ -40,7 +40,7 @@ The following example will parse a simple query:
 		print root.__dict__
 
 And print the node information the SELECT node:
-	{'computeClause': None,
+	root = {'computeClause': None,
 	 'cteList': None,
 	 'expandOnClause': None,
 	 'fetchFirstClause': None,
