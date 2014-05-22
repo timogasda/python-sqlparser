@@ -15,11 +15,14 @@ else:
 def download_library():
     import urllib
 
-    url = "http://www.sqlparser.com/dl/gsp_c_linux_v024.tar.gz"
+    url = "http://www.sqlparser.com/dl/gsp_c_linux_v026.tar.gz"
     file_name = "gsp_c_lib.tar.gz"
 
     if os.name == "nt":
-        url = "http://www.sqlparser.com/dl/gsp_c_windows_v024.zip"
+        if ARCH == '32':
+            url = "http://www.sqlparser.com/dl/gsp_c_windows_v026.zip"
+        else:
+            url = "http://www.sqlparser.com/dl/gsp_c_windows_x64_v026.zip"
         file_name = "gsp_c_lib.zip"
 
     print "Downloading library from '%s'..." % url
