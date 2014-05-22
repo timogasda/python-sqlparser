@@ -15,7 +15,7 @@ else:
 def download_library():
     import urllib
 
-    url = "http://www.sqlparser.com/dl/gsp_c_linux_v026.tar.gz"
+    url = "http://www.sqlparser.com/dl/gsp_c_linux_fpic_v024.tar.gz"
     file_name = "gsp_c_lib.tar.gz"
 
     if os.name == "nt":
