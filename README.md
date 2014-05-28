@@ -74,6 +74,6 @@ And print the node information the SELECT node:
  "withClauses": None}
  ```
 
- Examples
- --------
- For more examples please check the examples directory.
+Examples
+--------
+For more examples please check the examples directory.
