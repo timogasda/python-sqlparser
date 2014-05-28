@@ -25,20 +25,20 @@ Simply import the module with
 	import sqlparser
 The following example will parse a simple query:
 ```python
-	import sqlparser
+import sqlparser
 
-	query = "SELECT a, b FROM table_1 WHERE c > 20"
-	parser = sqlparser.Parser()
+query = "SELECT a, b FROM table_1 WHERE c > 20"
+parser = sqlparser.Parser()
 
-	# Check for syntax errors
-	if parser.check_syntax(query) == 0:
-		# Get first statement from the query
-		stmt = parser.get_statement(0)
+# Check for syntax errors
+if parser.check_syntax(query) == 0:
+	# Get first statement from the query
+	stmt = parser.get_statement(0)
 
-		# Get root node
-		root = stmt.get_root()
+	# Get root node
+	root = stmt.get_root()
 
-		print root.__dict__
+	print root.__dict__
 ```
 
 And print the node information the SELECT node:
