@@ -24,6 +24,7 @@ Usage
 Simply import the module with
 	import sqlparser
 The following example will parse a simple query:
+```python
 	import sqlparser
 
 	query = "SELECT a, b FROM table_1 WHERE c > 20"
@@ -38,6 +39,7 @@ The following example will parse a simple query:
 		root = stmt.get_root()
 
 		print root.__dict__
+```
 
 And print the node information the SELECT node:
 ```javascript
