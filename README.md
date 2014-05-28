@@ -73,3 +73,7 @@ And print the node information the SELECT node:
  "windowClause": None,
  "withClauses": None}
  ```
+
+ Examples
+ --------
+ For more examples please check the examples directory.
