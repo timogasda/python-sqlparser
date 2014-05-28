@@ -20,12 +20,12 @@ static PyMethodDef BridgeMethods[] =
 };
  
 PyMODINIT_FUNC
-initparsebridge(void)
+initsqlparser(void)
 {
 	PyObject *m;
 
 	// initialize module
-    m = Py_InitModule3("parsebridge", BridgeMethods, "Bridge between python and sqlparser");
+    m = Py_InitModule3("sqlparser", BridgeMethods, "Bridge between python and sqlparser");
 	 
 	if (m == NULL) return;
 	
