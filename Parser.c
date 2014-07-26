@@ -93,6 +93,90 @@ PyObject* Parser_check_syntax(PyObject* self, PyObject* args)
 	return r;
 }
 
+// Parser.tokenize(query) + return tokens
+PyObject* Parser_tokenize(PyObject* self, PyObject* args)
+{
+	/* NB: the query passed in here is held by the parser. If further
+	 * processing will done it must be Py_INCREF()'d and stored in the
+	 * parser object so it can later be cleaned up.
+	 */
+	int rc;
+	char *query;
+	PyObject *token_tuple;
+	PyObject *list;
+	//PyObject *query_object;
+	//PyObject *query_unicode;
+	Parser *parser = (Parser *)self;
+	char * token_str;
+	struct gsp_sourcetoken *token;
+	int i;
+	int token_cnt;
+
+	query = NULL;
+
+	// get query from first argument
+	if (args == NULL || args == Py_None) {
+		PyErr_SetString(PyExc_TypeError, "tokenize() takes at least 1 argument");
+		return NULL;	
+	}
+
+	rc = PyArg_ParseTuple(args, "s", &query);
+	/*if (!rc || query == NULL) {
+		rc = PyArg_ParseTuple(args, "u", &query);
+		// printf("parse u: %d / %p\n", rc, query);
+	}*/
+
+	if (!rc || query == NULL) {
+		PyErr_SetString(PyExc_TypeError, "tokenize() takes exactly one string argument");
+		return NULL;
+	}
+
+	rc = gsp_tokenize(parser->_parser, query);
+
+	if (rc != 0) {
+		PyErr_SetString(PyExc_BaseException, "tokenize() failed");
+		return NULL;
+	}
+
+	token_cnt = parser->_parser->number_of_token;
+	list = PyList_New(token_cnt);
+	if (!list) {
+		PyErr_SetString(PyExc_BaseException,
+			"tokenize() unable to create list");
+		return NULL;
+	}
+
+	for (i = 0; i < token_cnt; i++) {
+		token = &parser->_parser->sourcetokenlist[i];
+
+		// TODO: any unicode handling?
+		token_str = gsp_token_text(token);
+
+		if (!token_str) {
+			PyErr_SetString(PyExc_BaseException, "tokenize() invalid token");
+			Py_DECREF(list);
+			return NULL;
+		}
+
+		//printf("STR: %s\n", token_str);
+		//gsp_print_token(token);
+
+		token_tuple = Py_BuildValue("(is)", token->nCode, token_str);
+		free(token_str);
+
+		if (!token_tuple) {
+			PyErr_SetString(PyExc_BaseException, "tokenize() tuple failed");
+			Py_DECREF(list);
+			return NULL;
+		}
+
+		PyList_SET_ITEM(list, i, token_tuple);
+	}
+
+	return list;
+}
+
+
 // get nth statement
 // Parser.get_statement(n)
 PyObject* Parser_get_statement(PyObject* self, PyObject* args)
