@@ -14,8 +14,10 @@ void Parser_init_type(PyObject *m) {
 void Parser_dealloc(Parser *self)
 {
 	//printf("Parser_dealloc\n");
-    gsp_parser_free(self->_parser);
-    self->ob_type->tp_free((PyObject*)self);
+	if (self->_parser != NULL) {
+		gsp_parser_free(self->_parser);
+	}
+	self->ob_type->tp_free((PyObject*)self);
 }
 
 // Allocate new Parser object
