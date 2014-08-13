@@ -77,7 +77,9 @@ if __name__ == '__main__':
         			SQLPARSER_DIR + 'ext/node_visitor/' ],
             library_dirs = [ SQLPARSER_DIR + '/lib/' ],
             libraries = [ 'gspcollection' + ARCH, 'gspcore' + ARCH ],
-            define_macros = [ ('_CRT_SECURE_NO_WARNINGS', None), ('DONT_FIX_FRAGMENTS', None), ]
+            define_macros = [ ('_CRT_SECURE_NO_WARNINGS', None), ('DONT_FIX_FRAGMENTS', None), ],
+            extra_compile_args = ['-Wno-strict-prototypes'],
+
         )
 
         if sys.platform == 'win32' or sys.platform == 'win64':
