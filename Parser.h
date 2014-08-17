@@ -18,8 +18,10 @@ void Parser_init_type(PyObject *m);
 void Parser_dealloc(Parser *self);
 PyObject *Parser_new(PyTypeObject *type, PyObject *args, PyObject *kwds);
 PyObject *Parser_check_syntax(PyObject* self, PyObject* args);
+PyObject *Parser_tokenize(PyObject* self, PyObject* args);
 PyObject *Parser_get_statement(PyObject* self, PyObject* args);
 PyObject *Parser_get_statement_count(PyObject* self, PyObject* args);
+PyObject *Parser_get_tokens(PyObject* self, PyObject *args);
 int Parser_init(Parser* self, PyObject* args, PyObject *kwds);
 
 // Members/properties
@@ -31,9 +33,9 @@ static PyMemberDef Parser_members[] = {
 // Object methods
 static PyMethodDef Parser_methods[] = {
     {"check_syntax", (PyCFunction)Parser_check_syntax, METH_VARARGS,  "check_syntax(query)\nChecks syntax of the given *query*. Returns 0 if the query is valid.\n\n:type query: str\n:returns: int -- 0 for success" },
-	{"get_statement", (PyCFunction)Parser_get_statement, METH_VARARGS,  "get_statement(n)\nAfter parsing a query string with :meth:`Parser.check_syntax` this function will return the *n*-th :class:`Statement` in that string.\n\n:type n: int\n:returns: Statement" },
-	{"get_statement_count", (PyCFunction)Parser_get_statement_count, METH_VARARGS,  "get_statement_count()\nReturns the number of statements for the Parser object\n:returns: int" },
-
+    {"tokenize", (PyCFunction)Parser_tokenize, METH_VARARGS,  "tokenize(query)\nTokenizes the given *query*. Returns a list of (tokenCode, tokenValue) "},
+    {"get_statement", (PyCFunction)Parser_get_statement, METH_VARARGS,  "get_statement(n)\nAfter parsing a query string with :meth:`Parser.check_syntax` this function will return the *n*-th :class:`Statement` in that string.\n\n:type n: int\n:returns: Statement" },
+    {"get_statement_count", (PyCFunction)Parser_get_statement_count, METH_VARARGS,  "get_statement_count()\nReturns the number of statements for the Parser object\n:returns: int" },
     {NULL}  /* Sentinel */
 };
 
