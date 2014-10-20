@@ -36,7 +36,8 @@ def download_library():
         import zipfile
 
         archive = zipfile.ZipFile(file_name, 'r')
-        archive.extractall(SQLPARSER_DIR)
+        archive.extractall('.')
+        os.rename('./v026', SQLPARSER_DIR)
     else:
         import tarfile
 
