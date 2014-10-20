@@ -1,7 +1,7 @@
 import inspect
 
-import parsebridge
-from parsebridge import ENodeType
+import sqlparser
+from sqlparser import ENodeType
 
 Continue = 0
 Break = 1
@@ -44,7 +44,7 @@ class NodeVisitor:
 
         if self.has_visit_generic:
             self.visit_generic(node, d, name)
-        if isinstance(node, parsebridge.Node):
+        if isinstance(node, sqlparser.Node):
             if node.node_type in self.node_functions:
                 ret = self.node_functions[node.node_type](self, node, d, name)
             elif self.has_visit_node:

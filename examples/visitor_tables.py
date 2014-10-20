@@ -1,5 +1,5 @@
-import parsebridge
-from parsebridge import ENodeType, EExpressionType, ETableSource
+import sqlparser
+from sqlparser import ENodeType, EExpressionType, ETableSource
 import nodevisitor
 from nodevisitor import NodeVisitor
 
@@ -79,7 +79,7 @@ if __name__ == '__main__':
     query = """SELECT a, b, c FROM table1 "FOO" inner join "TABLE2" ON a = b"""
 
     # Create a new parser
-    parser = parsebridge.Parser(vendor=0)
+    parser = sqlparser.Parser(vendor=0)
     # Check syntax
     assert parser.check_syntax(query) == 0
     # Get first statement
