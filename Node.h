@@ -85,7 +85,7 @@ static PyTypeObject NodeType = {
 }; 
 
 
-#define MAX_NODE_PARSE_FUNCS 255 // arbitrary
+#define MAX_NODE_PARSE_FUNCS 300 // arbitrary
 
 typedef PyObject *(*NodeParseFunc)(gsp_node *, Statement *);
 static NodeParseFunc Node_parse_functions[MAX_NODE_PARSE_FUNCS];

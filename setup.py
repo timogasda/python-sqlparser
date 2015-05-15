@@ -15,15 +15,18 @@ else:
 def download_library():
     import urllib
 
-    url = "http://www.sqlparser.com/dl/gsp_c_linux_v024.tar.gz"
     file_name = "gsp_c_lib.tar.gz"
 
+    url = "http://www.sqlparser.com/dl/gsqlparser_c_linux32_trial_0_3_8.tar.gz"
     if os.name == "nt":
         if ARCH == '32':
-            url = "http://www.sqlparser.com/dl/gsp_c_windows_v026.zip"
+            url = "http://www.sqlparser.com/dl/gsqlparser_c_win32_trial_0_3_8.zip"
         else:
-            url = "http://www.sqlparser.com/dl/gsp_c_windows_x64_v026.zip"
+            url = "http://www.sqlparser.com/dl/gsqlparser_c_win64_trial_0_3_8.zip"
         file_name = "gsp_c_lib.zip"
+    else:
+        if ARCH == '64':
+            url = "http://www.sqlparser.com/dl/gsqlparser_c_linux64_trial_0_3_8.tar.gz"
 
     print "Downloading library from '%s'..." % url
 
@@ -36,22 +39,12 @@ def download_library():
         import zipfile
 
         archive = zipfile.ZipFile(file_name, 'r')
-        archive.extractall('.')
-        os.rename('./v026', SQLPARSER_DIR)
+        archive.extractall(SQLPARSER_DIR)
     else:
         import tarfile
 
         archive = tarfile.open(file_name)
         archive.extractall(SQLPARSER_DIR)
-
-        print "Dowloading additional libraries..."
-        url = "http://www.sqlparser.com/dl/gsp_c_linux_fpic_v024.tar.gz"
-        file_name = 'gsp_c_fpic_libs.tar.gz'
-
-        urllib.urlretrieve(url, file_name)
-
-        archive = tarfile.open(file_name)
-        archive.extractall(SQLPARSER_DIR + 'lib/')
 
     print "Done!"
 
@@ -77,7 +70,7 @@ if __name__ == '__main__':
         			SQLPARSER_DIR + 'ext/modifysql/',
         			SQLPARSER_DIR + 'ext/node_visitor/' ],
             library_dirs = [ SQLPARSER_DIR + '/lib/' ],
-            libraries = [ 'gspcollection' + ARCH, 'gspcore' + ARCH ],
+            libraries = [ 'gspcollection', 'gspcore' ],
             define_macros = [ ('_CRT_SECURE_NO_WARNINGS', None), ('DONT_FIX_FRAGMENTS', None), ],
             extra_compile_args = ['-Wno-strict-prototypes'],
 
