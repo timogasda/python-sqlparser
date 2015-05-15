@@ -51,7 +51,7 @@ class NodeVisitor:
                 ret = self.visit_node(node, d, name)
 
             if node.node_type == ENodeType.list:
-                if ret == Continue:
+                if ret == Continue or ret == ContinueAndNotify:
                     for idx, i in enumerate(node.list):
                         self.traverse(i, d + 1, 'item' + str(idx))
             else:
