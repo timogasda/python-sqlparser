@@ -17,16 +17,16 @@ def download_library():
 
     file_name = "gsp_c_lib.tar.gz"
 
-    url = "http://www.sqlparser.com/dl/gsqlparser_c_linux32_trial_0_3_8.tar.gz"
+    url = "http://www.sqlparser.com/dl/gsqlparser_c_linux32_trial_1_0_1.tar.gz"
     if os.name == "nt":
         if ARCH == '32':
-            url = "http://www.sqlparser.com/dl/gsqlparser_c_win32_trial_0_3_8.zip"
+            url = "http://www.sqlparser.com/dl/gsqlparser_c_win32_trial_1_1_0.zip"
         else:
-            url = "http://www.sqlparser.com/dl/gsqlparser_c_win64_trial_0_3_8.zip"
+            url = "http://www.sqlparser.com/dl/gsqlparser_c_win64_trial_1_1_0.zip"
         file_name = "gsp_c_lib.zip"
     else:
         if ARCH == '64':
-            url = "http://www.sqlparser.com/dl/gsqlparser_c_linux64_trial_0_3_8.tar.gz"
+            url = "http://www.sqlparser.com/dl/gsqlparser_c_linux64_trial_1_1_0.tar.gz"
 
     print "Downloading library from '%s'..." % url
 
@@ -59,12 +59,12 @@ if __name__ == '__main__':
 
     # check again (the user might have downloaded the library)
     if os.path.isdir(SQLPARSER_DIR):
-        parsebridge = Extension('sqlparser', 
-            sources = ['Parser.c', 'Statement.c', 'Node.c', 'ENodeType.c', 'parsebridgemodule.c', 
+        parsebridge = Extension('sqlparser',
+            sources = ['Parser.c', 'Statement.c', 'Node.c', 'ENodeType.c', 'parsebridgemodule.c',
         				SQLPARSER_DIR + 'ext/node_visitor/node_visitor.c',
         				SQLPARSER_DIR + 'ext/expr_traverse/expr_traverse.c',
         				SQLPARSER_DIR + 'ext/modifysql/modifysql.c' ],
-            include_dirs = [ SQLPARSER_DIR + 'core/', 
+            include_dirs = [ SQLPARSER_DIR + 'core/',
         			SQLPARSER_DIR + 'ext/collection/includes/',
         			SQLPARSER_DIR + 'ext/expr_traverse/',
         			SQLPARSER_DIR + 'ext/modifysql/',
