@@ -1,6 +1,9 @@
 python-sqlparser
 ================
 
+Note: This package is UNMAINTAINED
+--------
+
 A Python Module for the "General SQL Parser" library (sqlparser.com)
 
 Supported Systems
