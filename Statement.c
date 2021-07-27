@@ -26,7 +26,7 @@ PyObject* Statement_get_root(PyObject* self, PyObject* args)
 
 	//printf("Statement_get_root\n");
 
-	if (((Statement*)self)->_statement->stmt == NULL) {
+	if (((Statement*)self)->_statement != NULL || ((Statement*)self)->_statement->stmt == NULL) {
 		Py_RETURN_NONE;
 	}
 
